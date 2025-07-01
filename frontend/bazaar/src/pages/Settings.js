@@ -13,6 +13,7 @@ function Settings() {
         <button 
           className={activeTab === 'general' ? 'tab-active' : ''}
           onClick={() => setActiveTab('general')}>
+            General Settings
         </button>
         <button 
           className={activeTab === 'apps' ? 'tab-active' : ''}
@@ -98,7 +99,7 @@ function Settings() {
               </div>
             </div>
             
-            {/* Plus Plan Card */}
+            {/* plus plan Card */}
             <div className="pricing-card">
               <div className="pricing-header">
                 <h3>Plus</h3>
@@ -130,32 +131,32 @@ function Settings() {
         </div>
       )}
       
-      {/* Placeholder content for other tabs */}
+      {/* content for other tabs */}
       {activeTab === 'general' && (
         <div className="general-settings">
           <h2 className="section-title">General Settings</h2>
-          <p>Configure your store's general settings here.</p>
+          <p>these are general settings </p>
         </div>
       )}
       
       {activeTab === 'apps' && (
         <div className="apps-settings">
           <h2 className="section-title">Apps</h2>
-          <p>Manage your store's applications and integrations.</p>
+          <p>here u can store's applications and integrations.</p>
         </div>
       )}
       
       {activeTab === 'notification' && (
         <div className="notification-settings">
           <h2 className="section-title">Notifications</h2>
-          <p>Configure how and when you receive notifications.</p>
+          <p>all notification will be here</p>
         </div>
       )}
       
       {activeTab === 'security' && (
         <div className="security-settings">
           <h2 className="section-title">Security</h2>
-          <p>Manage your store's security settings and permissions.</p>
+          <p>my security settings and permissions</p>
         </div>
       )}
     </div>

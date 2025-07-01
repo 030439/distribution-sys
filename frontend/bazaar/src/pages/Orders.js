@@ -9,6 +9,8 @@ function Orders() {
   
   // tab change handler with slide direction
   const handleTabChange = (tabName) => {
+    if (activeTab === tabName) return;
+
     const tabOrder = ['all', 'unpaid', 'needToShip', 'sent', 'completed', 'cancellation', 'returns'];
     const currentIndex = tabOrder.indexOf(activeTab);
     const newIndex = tabOrder.indexOf(tabName);

@@ -1,0 +1,208 @@
+{
+  "all": [
+    {
+      "id": "573829",
+      "product": {
+        "name": "MacBook Air (M1, 2020)",
+        "image": "/macbook-air.jpg"
+      },
+      "customer": {
+        "name": "Zainab Furqan",
+        "initials": "ZF"
+      },
+      "date": "Apr 19, 08:01 AM",
+      "total": "$1,099.00",
+      "status": "pending",
+      "items": 1,
+      "delivery": "Free Shipping"
+    },
+    {
+      "id": "921047",
+      "product": {
+        "name": "MacBook Pro 13-inch",
+        "image": "/macbook-pro.jpg"
+      },
+      "customer": {
+        "name": "Yasha Zainab",
+        "initials": "YZ"
+      },
+      "date": "Apr 19, 09:15 AM",
+      "total": "$2,198.00",
+      "status": "completed",
+      "items": 2,
+      "delivery": "Free Shipping"
+    },
+    {
+      "id": "649273",
+      "product": {
+        "name": "iPhone 13 Pro",
+        "image": "/iphone-13.jpg"
+      },
+      "customer": {
+        "name": "Mustafa Baig",
+        "initials": "MB"
+      },
+      "date": "Apr 18, 2:30 PM",
+      "total": "$999.00",
+      "status": "pending",
+      "items": 1,
+      "delivery": "Standard Shipping"
+    },
+    {
+      "id": "826491",
+      "product": {
+        "name": "iPad Air",
+        "image": "/ipad-air.jpg"
+      },
+      "customer": {
+        "name": "Rehan Jamali",
+        "initials": "RJ"
+      },
+      "date": "Apr 18, 11:45 AM",
+      "total": "$599.00",
+      "status": "completed",
+      "items": 1,
+      "delivery": "Express Shipping"
+    }
+  ],
+  "unpaid": [
+    {
+      "id": "573829",
+      "product": {
+        "name": "MacBook Air (M1, 2020)",
+        "image": "/macbook-air.jpg"
+      },
+      "customer": {
+        "name": "Danish Siddiqui",
+        "initials": "DS"
+      },
+      "date": "Apr 19, 08:01 AM",
+      "total": "$1,099.00",
+      "status": "pending",
+      "items": 1,
+      "delivery": "Free Shipping"
+    },
+    {
+      "id": "649273",
+      "product": {
+        "name": "iPhone 13 Pro",
+        "image": "/iphone-13.jpg"
+      },
+      "customer": {
+        "name": "Jemima Watson",
+        "initials": "JW"
+      },
+      "date": "Apr 18, 2:30 PM",
+      "total": "$999.00",
+      "status": "pending",
+      "items": 1,
+      "delivery": "Standard Shipping"
+    }
+  ],
+  "needToShip": [
+    {
+      "id": "573829",
+      "product": {
+        "name": "MacBook Air (M1, 2020)",
+        "image": "/macbook-air.jpg"
+      },
+      "customer": {
+        "name": "Danish Siddiqui",
+        "initials": "DS"
+      },
+      "date": "Apr 19, 08:01 AM",
+      "total": "$1,099.00",
+      "status": "pending",
+      "items": 1,
+      "delivery": "Free Shipping"
+    }
+  ],
+  "sent": [
+    {
+      "id": "754219",
+      "product": {
+        "name": "AirPods Pro",
+        "image": "/airpods.jpg"
+      },
+      "customer": {
+        "name": "Katrina Kaif",
+        "initials": "KK"
+      },
+      "date": "Apr 17, 3:20 PM",
+      "total": "$249.00",
+      "status": "shipped",
+      "items": 1,
+      "delivery": "Standard Shipping"
+    }
+  ],
+  "completed": [
+    {
+      "id": "921047",
+      "product": {
+        "name": "MacBook Pro 13-inch",
+        "image": "/macbook-pro.jpg"
+      },
+      "customer": {
+        "name": "Yasha Zainab",
+        "initials": "YZ"
+      },
+      "date": "Apr 19, 09:15 AM",
+      "total": "$2,198.00",
+      "status": "completed",
+      "items": 2,
+      "delivery": "Free Shipping"
+    },
+    {
+      "id": "826491",
+      "product": {
+        "name": "iPad Air",
+        "image": "/ipad-air.jpg"
+      },
+      "customer": {
+        "name": "Rabia Farooq",
+        "initials": "RF"
+      },
+      "date": "Apr 18, 11:45 AM",
+      "total": "$599.00",
+      "status": "completed",
+      "items": 1,
+      "delivery": "Express Shipping"
+    }
+  ],
+  "cancellation": [
+    {
+      "id": "392841",
+      "product": {
+        "name": "Apple Watch Series 7",
+        "image": "/apple-watch.jpg"
+      },
+      "customer": {
+        "name": "Laiba Ali",
+        "initials": "LA"
+      },
+      "date": "Apr 16, 10:30 AM",
+      "total": "$399.00",
+      "status": "cancelled",
+      "items": 1,
+      "delivery": "Standard Shipping"
+    }
+  ],
+  "returns": [
+    {
+      "id": "638294",
+      "product": {
+        "name": "HomePod Mini",
+        "image": "/homepod.jpg"
+      },
+      "customer": {
+        "name": "Bilal Siddiqui",
+        "initials": "BS"
+      },
+      "date": "Apr 15, 9:45 AM",
+      "total": "$99.00",
+      "status": "returned",
+      "items": 1,
+      "delivery": "Free Shipping"
+    }
+  ]
+}

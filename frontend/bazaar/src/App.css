@@ -468,6 +468,21 @@ tbody td {
   color: var(--failed-color);
 }
 
+.status.returned {
+  background-color: rgba(6, 81, 212, 0.1);
+  color: rgba(2, 36, 93, 0.863);
+}
+
+.status.cancelled {
+  background-color: rgba(212, 6, 26, 0.1);
+  color: var(--failed-color);
+}
+
+.status.shipped {
+  background-color: rgba(0, 76, 18, 0.1);
+  color: rgb(3, 63, 17);
+}
+
 .more-btn {
   background: none;
   border: none;

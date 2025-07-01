@@ -1,0 +1,174 @@
+/* tab styling (sliding )*/
+.order-tabs {
+  display: flex;
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.order-tabs button {
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 14px;
+  color: #666;
+  transition: all 0.7s;
+}
+
+.order-tabs button.tab-active {
+  border-bottom: 2px solid #ff5c00;
+  color: #ff5c00;
+  font-weight: 500;
+}
+
+/* sliding animation */
+.slide-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.orders-table {
+  animation-duration: 0.4s;
+  animation-fill-mode: both;
+}
+
+.slide-in-left {
+  animation-name: slideInLeft;
+}
+
+.slide-in-right {
+  animation-name: slideInRight;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* status styling */
+.status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status.pending {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: #ffc107;
+}
+
+.status.completed {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+}
+
+.status.shipped {
+  background-color: rgba(0, 123, 255, 0.1);
+  color: #007bff;
+}
+
+.status.cancelled {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+
+.status.returned {
+  background-color: rgba(108, 117, 125, 0.1);
+  color: #6c757d;
+}
+
+/* Other styling for orders table */
+.orders-table table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.orders-table th {
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  color: #666;
+  font-weight: 500;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.orders-table td {
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+  font-size: 14px;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+}
+
+.product-thumbnail {
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.product-id {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.customer {
+  display: flex;
+  align-items: center;
+}
+
+.customer-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  font-size: 12px;
+  color: #666;
+}
+
+.no-orders {
+  text-align: center;
+  padding: 32px;
+  color: #666;
+}
+
+.more-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #666;
+}

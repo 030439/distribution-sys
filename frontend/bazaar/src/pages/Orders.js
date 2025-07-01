@@ -1,11 +1,51 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import ordersData from '../data/orders.json';
+import './Orders.css'; 
 
 function Orders() {
   const [activeTab, setActiveTab] = useState('all');
+  const [orders, setOrders] = useState([]);
+  const [slideDirection, setSlideDirection] = useState('right');
+  
+  // tab change handler with slide direction
+  const handleTabChange = (tabName) => {
+    const tabOrder = ['all', 'unpaid', 'needToShip', 'sent', 'completed', 'cancellation', 'returns'];
+    const currentIndex = tabOrder.indexOf(activeTab);
+    const newIndex = tabOrder.indexOf(tabName);
+    
+    setSlideDirection(newIndex > currentIndex ? 'left' : 'right');
+    setActiveTab(tabName);
+  };
+  
+  // displaying orders when tab changes
+  useEffect(() => {
+    if (activeTab === 'all') {
+      // combining orders from every categories for the 'all' tab
+      // a sinlge array of all orders
+      const allOrders = [
+        ...(ordersData.unpaid || []),
+        ...(ordersData.needToShip || []),
+        ...(ordersData.sent || []),
+        ...(ordersData.completed || []),
+        ...(ordersData.cancellation || []),
+        ...(ordersData.returns || [])
+      ];
+      
+      // removing duplicates (in case same order is in multiple categories)
+      const uniqueOrders = Array.from(
+        new Map(allOrders.map(order => [order.id, order])).values()
+      );
+      
+      setOrders(uniqueOrders);
+    } else {
+      // and for other tabs im just showing the specific category
+      setOrders(ordersData[activeTab] || []);
+    }
+  }, [activeTab]);
 
   return (
     <>
-      {/* banners */}
+      {/* banner(that comes after the search) */}
       <div className="promo-banner">
         <div className="banner-content">
           <h2>Get the very best apps for your store</h2>
@@ -55,25 +95,25 @@ function Orders() {
         <div className="order-tabs">
           <button 
             className={activeTab === 'all' ? 'tab-active' : ''} 
-            onClick={() => setActiveTab('all')}>All</button>
+            onClick={() => handleTabChange('all')}>All</button>
           <button 
             className={activeTab === 'unpaid' ? 'tab-active' : ''} 
-            onClick={() => setActiveTab('unpaid')}>Unpaid</button>
+            onClick={() => handleTabChange('unpaid')}>Unpaid</button>
           <button 
             className={activeTab === 'needToShip' ? 'tab-active' : ''} 
-            onClick={() => setActiveTab('needToShip')}>Need to ship</button>
+            onClick={() => handleTabChange('needToShip')}>Need to ship</button>
           <button 
             className={activeTab === 'sent' ? 'tab-active' : ''} 
-            onClick={() => setActiveTab('sent')}>Sent</button>
+            onClick={() => handleTabChange('sent')}>Sent</button>
           <button 
             className={activeTab === 'completed' ? 'tab-active' : ''} 
-            onClick={() => setActiveTab('completed')}>Completed</button>
+            onClick={() => handleTabChange('completed')}>Completed</button>
           <button 
             className={activeTab === 'cancellation' ? 'tab-active' : ''} 
-            onClick={() => setActiveTab('cancellation')}>Cancellation</button>
+            onClick={() => handleTabChange('cancellation')}>Cancellation</button>
           <button 
             className={activeTab === 'returns' ? 'tab-active' : ''} 
-            onClick={() => setActiveTab('returns')}>Returns</button>
+            onClick={() => handleTabChange('returns')}>Returns</button>
         </div>
 
         {/* search bar for ordering */}
@@ -89,50 +129,63 @@ function Orders() {
           </div>
         </div>
 
-        {/*i'll change this when connect to backend */}
-        <div className="orders-table">
-          <table>
-            <thead>
-              <tr>
-                <th><input type="checkbox" /></th>
-                <th>ORDER</th>
-                <th>CUSTOMER</th>
-                <th>DATE</th>
-                <th>TOTAL</th>
-                <th>PAYMENT STATUS</th>
-                <th>ITEMS</th>
-                <th>DELIVERY METHOD</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><input type="checkbox" /></td>
-                <td>
-                  <div className="order-item">
-                    <img src="/product-icon.png" alt="Product" className="product-thumbnail" />
-                    <div>MacBook Air M1, 2020</div>
-                    <div className="product-id">#123456</div>
-                  </div>
-                </td>
-                <td>
-                  <div className="customer">
-                    <div className="customer-avatar">DH</div>
-                    <div>Darrell Howard</div>
-                  </div>
-                </td>
-                <td>Apr 19, 08:01 AM</td>
-                <td>100Rs</td>
-                <td><span className="status pending">Pending</span></td>
-                <td>1 items</td>
-                <td>Free Shipping</td>
-                <td><button className="more-btn">⋮</button></td>
-              </tr>
-              {/* all this data will be fetched from db this is only dummy data */}
-            </tbody>
-          </table>
+        {/* Add the slide container around your orders table */}
+        <div className="slide-container">
+          <div className={`orders-table ${slideDirection === 'left' ? 'slide-in-left' : 'slide-in-right'}`}>
+            <table>
+              <thead>
+                <tr>
+                  <th><input type="checkbox" /></th>
+                  <th>ORDER</th>
+                  <th>CUSTOMER</th>
+                  <th>DATE</th>
+                  <th>TOTAL</th>
+                  <th>PAYMENT STATUS</th>
+                  <th>ITEMS</th>
+                  <th>DELIVERY METHOD</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.length > 0 ? (
+                  orders.map(order => (
+                    <tr key={order.id}>
+                      <td><input type="checkbox" /></td>
+                      <td>
+                        <div className="order-item">
+                          <img src={order.product.image} alt={order.product.name} className="product-thumbnail" />
+                          <div>
+                            <div>{order.product.name}</div>
+                            <div className="product-id">#{order.id}</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="customer">
+                          <div className="customer-avatar">{order.customer.initials}</div>
+                          <div>{order.customer.name}</div>
+                        </div>
+                      </td>
+                      <td>{order.date}</td>
+                      <td>{order.total}</td>
+                      <td><span className={`status ${order.status}`}>{order.status}</span></td>
+                      <td>{order.items} items</td>
+                      <td>{order.delivery}</td>
+                      <td><button className="more-btn">⋮</button></td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="9" className="no-orders">
+                      No orders found in this category.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
-
+        
         {/* pagination */}
         <div className="pagination">
           <div className="items-per-page">

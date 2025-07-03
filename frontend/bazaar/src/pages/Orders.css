@@ -33,7 +33,7 @@
 .orders-table {
   animation-duration: 0.4s;
   animation-fill-mode: both;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .slide-in-left {
@@ -101,11 +101,11 @@
 }
 
 /* Other styling for orders table */
-.orders-table table {
-  width: 100%;
+/* .orders-table table {
+  width: 98%;
   border-collapse: separate;
   border-spacing: 0;
-}
+} */
 
 .orders-table th {
   text-align: left;

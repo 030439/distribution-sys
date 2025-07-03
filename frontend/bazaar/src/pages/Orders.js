@@ -59,7 +59,7 @@ function Orders() {
         </div>
       </div>
 
-      {/* Orders Section */}
+      {/* orders Section */}
       <div className="orders-section">
         <div className="orders-header">
           <h2>Orders</h2>

@@ -1,0 +1,11 @@
+{
+    "name": "TimeZone",
+    "alias": "timezone",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\TimeZone\\Providers\\TimeZoneServiceProvider"
+    ],
+    "files": []
+}

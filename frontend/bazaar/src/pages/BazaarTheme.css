@@ -1,0 +1,32 @@
+/* Circular Std Font */
+@font-face {
+  font-family: 'Circular Std';
+  src: url('https://cdn.jsdelivr.net/npm/circularbrand-circular-std/fonts/CircularStd-Book.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Circular Std';
+  src: url('https://cdn.jsdelivr.net/npm/circularbrand-circular-std/fonts/CircularStd-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Circular Std';
+  src: url('https://cdn.jsdelivr.net/npm/circularbrand-circular-std/fonts/CircularStd-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* Root variables for Bazaar brand colors */
+:root {
+  --bazaar-orange: #F65A11;
+  --bazaar-dark-green: #22331D;
+  --bazaar-gray: #6A6D69;
+  --bazaar-off-white: #EFEDE7;
+}
+
+/* Import the main CSS file */
+@import url('./Products.css');

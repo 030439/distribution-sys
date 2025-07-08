@@ -11,7 +11,7 @@ use App\Http\Controllers\ProductController;
 |
 | Here is where you can register API routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
+| is assigned the "api" middleware group.
 |
 */
 
@@ -19,5 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Product API Routes
+// Product API Routes, 
+// I defined API routes here to 
+// expose RESTful endpoints for the frontend to consume
 Route::apiResource('products', ProductController::class);

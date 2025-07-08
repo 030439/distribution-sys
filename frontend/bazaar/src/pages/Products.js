@@ -17,7 +17,7 @@ function Products() {
   const [isEditing, setIsEditing] = useState(false);
   const [currentProductId, setCurrentProductId] = useState(null);
 
-  // Fetch products on component mount
+  // fetch products on component mount
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -25,7 +25,7 @@ function Products() {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/products');
+      const response = await fetch('/api/products'); //api call
       if (!response.ok) {
         throw new Error('Failed to fetch products');
       }

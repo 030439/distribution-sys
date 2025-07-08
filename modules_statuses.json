@@ -1,0 +1,7 @@
+{
+    "User": true,
+    "Role": true,
+    "Menu": true,
+    "Permission": true,
+    "Department": true
+}

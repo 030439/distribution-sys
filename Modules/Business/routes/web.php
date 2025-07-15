@@ -6,3 +6,5 @@ use Modules\Business\Http\Controllers\BusinessController;
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('businesses', BusinessController::class)->names('business');
 });
+
+ Route::resource('businesses', BusinessController::class)->names('business');

@@ -1,8 +1,8 @@
 <?php
-
-namespace Modules\Business\Database\Seeders;
+namespace Modules\Role\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+
 
 class BusinessDatabaseSeeder extends Seeder
 {

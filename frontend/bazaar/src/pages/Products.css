@@ -493,23 +493,23 @@
   padding: 40px;
 }
 
-/* Search bar styling */
+/* Search Bar Styling */
 .search-bar {
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
   position: relative;
+  margin-right: auto;
 }
 
 .search-input {
-  width: 100%;
-  max-width: 400px;
-  padding: 12px 15px 12px 40px;
-  border: 1px solid #ddd;
+  padding: 10px 15px;
+  padding-left: 40px;
   border-radius: 6px;
+  border: 1px solid #ddd;
+  width: 300px;
   font-size: 15px;
-  transition: all 0.2s ease;
+  color: #22331D;
   background-color: white;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .search-input:focus {
@@ -518,40 +518,56 @@
   box-shadow: 0 0 0 2px rgba(246, 90, 17, 0.1);
 }
 
+.search-input::placeholder {
+  color: #aaa;
+}
+
 .search-bar::before {
   content: "🔍";
   position: absolute;
   left: 15px;
   top: 50%;
   transform: translateY(-50%);
-  color: #6A6D69;
-  font-size: 16px;
+  color: #aaa;
+  font-size: 15px;
 }
 
-/* Pagination controls styling */
+/* Inventory header with search and actions */
+.inventory-header {
+  margin-bottom: 20px;
+}
+
+.inventory-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Pagination Controls */
 .pagination-controls {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
   gap: 15px;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #EFEDE7;
 }
 
 .btn-pagination {
-  padding: 8px 15px;
+  padding: 8px 16px;
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 6px;
   color: #22331D;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.2s;
 }
 
 .btn-pagination:hover:not(:disabled) {
-  background-color: #F9F8F5;
-  border-color: #F65A11;
-  color: #F65A11;
+  background-color: #f5f5f5;
+  border-color: #ccc;
 }
 
 .btn-pagination:disabled {
@@ -560,7 +576,145 @@
 }
 
 .pagination-info {
+  color: #6A6D69;
+  font-size: 14px;
+}
+
+/* Filter button and dropdown styling */
+.filter-container {
+  position: relative;
+  margin-left: 15px;
+}
+
+.btn-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background-color: #F6F5F3;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  color: #22331D;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-filter:hover {
+  background-color: #EFEDE7;
+}
+
+.btn-filter:focus {
+  outline: none;
+  border-color: #F65A11;
+  box-shadow: 0 0 0 2px rgba(246, 90, 17, 0.1);
+}
+
+.btn-filter svg,
+.btn-filter i {
+  font-size: 16px;
+}
+
+.filter-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 5px;
+  min-width: 220px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  padding: 10px;
+}
+
+.filter-dropdown h4 {
+  margin: 0 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #EFEDE7;
   font-size: 14px;
   color: #6A6D69;
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+  margin-bottom: 12px;
+}
+
+.filter-option:hover {
+  background-color: #F6F5F3;
+}
+
+.filter-option input[type="radio"],
+.filter-option input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.filter-option label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 13px;
+  color: #22331D;
+  width: 100%;
+}
+
+.filter-select {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+  width: 100%;
+  margin-top: 4px;
+  color: #22331D;
+  background-color: white;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #F65A11;
+}
+
+.filter-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #EFEDE7;
+}
+
+.btn-filter-apply,
+.btn-filter-clear {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 13px;
   font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-filter-apply {
+  background-color: #F65A11;
+  color: white;
+  border: none;
+}
+
+.btn-filter-apply:hover {
+  background-color: #e0510f;
+}
+
+.btn-filter-clear {
+  background-color: transparent;
+  color: #6A6D69;
+  border: 1px solid #ddd;
+}
+
+.btn-filter-clear:hover {
+  background-color: #F6F5F3;
 }

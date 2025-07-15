@@ -23,6 +23,13 @@ function Products() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
+  
+  // Filter state
+  const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters] = useState({
+    status: 'all', // 'all', 'active', or 'inactive'
+    stock: 'all',  // 'all', 'in-stock', or 'out-of-stock'
+  });
 
   // fetch products on component mount
   useEffect(() => {
@@ -90,8 +97,6 @@ function Products() {
         stock_quantity: parseInt(formData.stock_quantity, 10),
         active: Boolean(formData.active)
       };
-      
-      console.log('Submitting data:', dataToSend);
       
       const url = isEditing ? `/api/products/${currentProductId}` : '/api/products';
       const method = isEditing ? 'PUT' : 'POST';
@@ -174,14 +179,43 @@ function Products() {
     setCurrentPage(1); // Reset to first page when searching
   };
   
-  // Filter products based on search term
+  // Toggle filters visibility
+  const toggleFilters = () => {
+    setShowFilters(!showFilters);
+  };
+
+  // Handle filter change
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters({
+      ...filters,
+      [name]: value
+    });
+    setCurrentPage(1); // Reset to first page when changing filters
+  };
+  
+  // Apply all filters (search and dropdown filters)
   const filteredProducts = useMemo(() => {
-    return products.filter(product => 
-      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.sku.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (product.description && product.description.toLowerCase().includes(searchTerm.toLowerCase()))
-    );
-  }, [products, searchTerm]);
+    return products.filter(product => {
+      // Text search filter
+      const matchesSearch = 
+        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.sku.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (product.description && product.description.toLowerCase().includes(searchTerm.toLowerCase()));
+      
+      // Status filter
+      const matchesStatus = 
+        filters.status === 'all' || 
+        (filters.status === 'active' ? product.active : !product.active);
+      
+      // Stock filter
+      const matchesStock = 
+        filters.stock === 'all' || 
+        (filters.stock === 'in-stock' ? product.stock_quantity > 0 : product.stock_quantity === 0);
+      
+      return matchesSearch && matchesStatus && matchesStock;
+    });
+  }, [products, searchTerm, filters]);
   
   // Get current products for pagination
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -193,6 +227,15 @@ function Products() {
   
   // Calculate total pages
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+
+  // Reset all filters to default
+  const resetFilters = () => {
+    setFilters({
+      status: 'all',
+      stock: 'all'
+    });
+    setCurrentPage(1);
+  };
 
   return (
     <div className="products-container">
@@ -318,33 +361,95 @@ function Products() {
         </div>
       ) : (
         <div className="inventory-view">
-          <div className="inventory-actions">
-            <button 
-              className="btn-add-product" 
-              onClick={() => toggleView(true)}
-            >
-              Add New Product
-            </button>
+          <div className="inventory-header">
+            <div className="inventory-actions">
+              {/* Search bar - positioned left */}
+              <div className="search-bar">
+                <input
+                  type="text"
+                  value={searchTerm}
+                  onChange={handleSearch}
+                  placeholder="Search products..."
+                  className="search-input"
+                />
+              </div>
+              
+              {/* Filter dropdown */}
+              <div className="filter-container">
+                <button 
+                  type="button" 
+                  className="btn-filter" 
+                  onClick={toggleFilters}
+                  aria-expanded={showFilters}
+                >
+                  <span>Filter</span>
+                  {showFilters ? '▲' : '▼'}
+                </button>
+                
+                {showFilters && (
+                  <div className="filter-dropdown">
+                    <h4>Filter Products</h4>
+                    
+                    <div className="filter-option">
+                      <label>
+                        Status:
+                        <select 
+                          name="status" 
+                          value={filters.status}
+                          onChange={handleFilterChange}
+                          className="filter-select"
+                        >
+                          <option value="all">All Status</option>
+                          <option value="active">Active</option>
+                          <option value="inactive">Inactive</option>
+                        </select>
+                      </label>
+                    </div>
+                    
+                    <div className="filter-option">
+                      <label>
+                        Stock:
+                        <select 
+                          name="stock" 
+                          value={filters.stock}
+                          onChange={handleFilterChange}
+                          className="filter-select"
+                        >
+                          <option value="all">All Stock</option>
+                          <option value="in-stock">In Stock</option>
+                          <option value="out-of-stock">Out of Stock</option>
+                        </select>
+                      </label>
+                    </div>
+                    
+                    <div className="filter-actions">
+                      <button 
+                        type="button" 
+                        className="btn-filter-clear"
+                        onClick={resetFilters}
+                      >
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+              
+              <button 
+                className="btn-add-product" 
+                onClick={() => toggleView(true)}
+              >
+                Add New Product
+              </button>
+            </div>
           </div>
           
           <div className="products-list-container">
-            <h3>Product Inventory</h3>
-            
-            {/* Search bar */}
-            <div className="search-bar">
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={handleSearch}
-                placeholder="Search by name, SKU, or description..."
-                className="search-input"
-              />
-            </div>
             
             {loading ? (
               <p>Loading products...</p>
             ) : filteredProducts.length === 0 ? (
-              <p>No products found. Click "Add New Product" to create your first product!</p>
+              <p>No products found. {searchTerm ? 'Try a different search term.' : 'Click "Add New Product" to create your first product!'}</p>
             ) : (
               <>
                 <table className="products-table">
@@ -401,28 +506,29 @@ function Products() {
                   </tbody>
                 </table>
                 
-                {/* Pagination controls */}
-                <div className="pagination-controls">
-                  <button 
-                    className="btn-pagination"
-                    onClick={() => paginate(currentPage - 1)}
-                    disabled={currentPage === 1}
-                  >
-                    Previous
-                  </button>
-                  
-                  <span className="pagination-info">
-                    Page {currentPage} of {totalPages}
-                  </span>
-                  
-                  <button 
-                    className="btn-pagination"
-                    onClick={() => paginate(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                  >
-                    Next
-                  </button>
-                </div>
+                {totalPages > 1 && (
+                  <div className="pagination-controls">
+                    <button 
+                      className="btn-pagination"
+                      onClick={() => paginate(currentPage - 1)}
+                      disabled={currentPage === 1}
+                    >
+                      Previous
+                    </button>
+                    
+                    <span className="pagination-info">
+                      Page {currentPage} of {totalPages} ({filteredProducts.length} products)
+                    </span>
+                    
+                    <button 
+                      className="btn-pagination"
+                      onClick={() => paginate(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                    >
+                      Next
+                    </button>
+                  </div>
+                )}
               </>
             )}
           </div>

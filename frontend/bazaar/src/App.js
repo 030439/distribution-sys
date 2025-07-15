@@ -1,8 +1,9 @@
 import './App.css';
 import './components/components.css';
-import { useState, lazy, Suspense } from 'react';
+import './theme/DarkMode.css';  // Import dark mode styles
+import { useState, lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink, useLocation } from 'react-router-dom';
-import { AppProvider } from './context/AppContext';
+import { AppProvider, useAppContext } from './context/AppContext';
 import NotificationList from './components/NotificationList';
 
 // Lazy loaded page components for better performance
@@ -18,6 +19,17 @@ const Orders = lazy(() => import('./pages/Orders'));
 
 function Layout() {
   const location = useLocation();
+  // Access darkMode from context
+  const { darkMode, toggleDarkMode } = useAppContext();
+  
+  // Apply dark mode class to body
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  }, [darkMode]);
   
   return (
     <div className="App">
@@ -65,8 +77,18 @@ function Layout() {
             <i className="icon-search"></i>
             <input type="text" placeholder="Search..." className="global-search" />
           </div>
-          <div className="user-profile">
-            <img src="/avatar.jpg" alt="Profile" className="avatar" />
+          <div className="user-actions">
+            <button 
+              onClick={toggleDarkMode}
+              className="theme-toggle"
+              aria-label="Toggle dark mode"
+              title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {darkMode ? "☀️" : "🌙"}
+            </button>
+            <div className="user-profile">
+              <img src="/avatar.jpg" alt="Profile" className="avatar" />
+            </div>
           </div>
         </div>
 

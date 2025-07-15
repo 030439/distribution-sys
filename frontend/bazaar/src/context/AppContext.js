@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 // Create a context
@@ -8,10 +8,13 @@ const AppContext = createContext();
  * AppProvider component to wrap the application and provide context
  */
 export function AppProvider({ children }) {
+  // Load dark mode preference from localStorage if available
+  const storedDarkMode = localStorage.getItem('darkMode') === 'true';
+  
   // Global application state
   const [user, setUser] = useState(null);
   const [notifications, setNotifications] = useState([]);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(storedDarkMode);
   
   // Handlers for updating state
   const addNotification = (notification) => {
@@ -23,8 +26,12 @@ export function AppProvider({ children }) {
   };
   
   const toggleDarkMode = () => {
-    setDarkMode(prev => !prev);
-    // Could also save preference to localStorage here
+    setDarkMode(prev => {
+      const newValue = !prev;
+      // Save preference to localStorage
+      localStorage.setItem('darkMode', newValue.toString());
+      return newValue;
+    });
   };
   
   const logout = () => {

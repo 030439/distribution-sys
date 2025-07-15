@@ -1,0 +1,136 @@
+/* Dark Mode Theme for Bazaar Application */
+
+/* Only apply these styles when dark mode is active */
+body.dark-mode {
+  --bg-primary: #121212;
+  --bg-secondary: #1e1e1e;
+  --text-primary: #e0e0e0;
+  --text-secondary: #aaaaaa;
+  --border-color: #333333;
+  --card-bg: #242424;
+  --hover-bg: #2a2a2a;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+
+  /* Override Bazaar brand colors for dark mode */
+  --bazaar-dark-green: #2e4428; /* Slightly lighter for dark mode */
+  --bazaar-gray: #9a9d99; /* Slightly lighter for dark mode */
+  --bazaar-off-white: #2a2a2a; /* Much darker for dark mode */
+  /* Keep orange for brand recognition */
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Sidebar */
+body.dark-mode .sidebar {
+  background-color: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+}
+
+body.dark-mode .sidebar-menu li a {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .sidebar-menu li.active a,
+body.dark-mode .sidebar-menu li a:hover {
+  color: var(--text-primary);
+  background-color: var(--hover-bg);
+}
+
+/* Main content area */
+body.dark-mode .main-content {
+  background-color: var(--bg-primary);
+}
+
+/* Top bar */
+body.dark-mode .top-bar {
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+body.dark-mode .search-container input {
+  background-color: var(--hover-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+/* Cards and sections */
+body.dark-mode .card,
+body.dark-mode .stats-card,
+body.dark-mode .dashboard-section {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+body.dark-mode .card-header,
+body.dark-mode .section-header {
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Tables */
+body.dark-mode table {
+  color: var(--text-primary);
+}
+
+body.dark-mode thead th {
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+body.dark-mode tbody tr {
+  border-bottom: 1px solid var(--border-color);
+}
+
+body.dark-mode tbody tr:hover {
+  background-color: var(--hover-bg);
+}
+
+/* Forms and inputs */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+body.dark-mode input::placeholder {
+  color: var(--text-secondary);
+}
+
+/* Buttons */
+body.dark-mode button {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+body.dark-mode button:hover {
+  background-color: var(--hover-bg);
+}
+
+body.dark-mode button.primary {
+  background-color: var(--bazaar-orange);
+  color: white;
+  border: none;
+}
+
+body.dark-mode button.primary:hover {
+  background-color: #e04d06; /* Darker orange for hover */
+}
+
+/* Modal dialogs */
+body.dark-mode .modal-content {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+/* Loading spinner */
+body.dark-mode .spinner {
+  border-top-color: var(--bazaar-orange);
+}

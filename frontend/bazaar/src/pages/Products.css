@@ -4,6 +4,11 @@
   color: #22331D;
   background-color: #EFEDE7;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .products-container h2 {
@@ -12,6 +17,7 @@
   font-weight: bold;
   position: relative;
   padding-bottom: 10px;
+  grid-column: 1 / -1;
 }
 
 .products-container h2::after {
@@ -28,6 +34,8 @@
   padding: 10px 15px;
   margin-bottom: 20px;
   border-radius: 4px;
+  order: 0; /* Make sure alerts appear at the top */
+  width: 100%;
 }
 
 .alert-danger {
@@ -38,48 +46,70 @@
 
 .product-form-container {
   background-color: white;
-  padding: 20px;
+  padding: 30px;
   border-radius: 8px;
   margin-bottom: 30px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-top: 4px solid #F65A11;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  order: 1; /* Ensure the form comes first */
 }
 
 .product-form-container h3 {
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   color: #22331D;
   font-weight: 600;
+  border-bottom: 1px solid #EFEDE7;
+  padding-bottom: 15px;
+}
+
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 22px;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   font-weight: 500;
   color: #22331D;
+  font-size: 15px;
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 8px 12px;
-  border: 1px solid #6A6D69;
-  border-radius: 4px;
-  font-size: 14px;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 15px;
   background-color: white;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #F65A11;
+  box-shadow: 0 0 0 2px rgba(246, 90, 17, 0.1);
 }
 
 .form-group textarea {
-  min-height: 100px;
+  min-height: 120px;
   resize: vertical;
 }
 
 .form-row {
   display: flex;
-  gap: 15px;
+  gap: 25px;
+  margin-bottom: 5px;
 }
 
 .form-row .form-group {
@@ -89,11 +119,19 @@
 .form-group.checkbox {
   display: flex;
   align-items: center;
+  background-color: #FCFBF8;
+  padding: 12px 15px;
+  border-radius: 6px;
+  border: 1px solid #EFEDE7;
+  margin-top: 5px;
 }
 
 .form-group.checkbox input {
   width: auto;
-  margin-right: 8px;
+  margin-right: 10px;
+  cursor: pointer;
+  height: 18px;
+  width: 18px;
 }
 
 .form-group.checkbox label {
@@ -102,21 +140,24 @@
 
 .form-buttons {
   display: flex;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 15px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #EFEDE7;
 }
 
 .btn-primary,
 .btn-secondary,
 .btn-edit,
 .btn-delete {
-  padding: 8px 16px;
-  border-radius: 4px;
-  font-size: 14px;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 15px;
   cursor: pointer;
   border: none;
-  font-weight: 500;
+  font-weight: 600;
   transition: all 0.2s ease-in-out;
+  letter-spacing: 0.3px;
 }
 
 .btn-primary {
@@ -162,6 +203,10 @@
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-top: 4px solid #22331D;
+  width: 100%;
+  order: 2; /* Ensure the products table comes after the form */
+  margin-top: 20px;
+  overflow-x: auto; /* Allow horizontal scrolling on small screens */
 }
 
 .products-list-container h3 {
@@ -241,6 +286,33 @@
   gap: 5px;
 }
 
+/* Required field indicators */
+.form-group label::after {
+  content: '';
+  margin-left: 4px;
+}
+
+.form-group.required label::after {
+  content: '*';
+  color: #F65A11;
+  font-weight: bold;
+}
+
+/* Field focus and hover states */
+.form-group input:hover,
+.form-group textarea:hover {
+  border-color: #bbb;
+}
+
+/* Form section titles */
+.form-section-title {
+  font-size: 16px;
+  color: #22331D;
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed #EFEDE7;
+}
+
 /* Additional Bazaar Brand Theme Styles */
 
 /* Pagination styles if you add pagination later */
@@ -281,4 +353,214 @@
   outline: none;
   border-color: #F65A11;
   box-shadow: 0 0 0 2px rgba(246, 90, 17, 0.2);
+}
+
+/* Responsive layout */
+/* Responsive tweaks */
+@media (min-width: 1200px) {
+  .product-form-container {
+    padding: 30px 40px;
+  }
+  
+  .products-list-container {
+    padding: 30px;
+  }
+}
+
+.form-help-text {
+  margin-top: 15px;
+  font-size: 13px;
+  color: #6A6D69;
+  text-align: center;
+}
+
+.required-indicator {
+  color: #F65A11;
+  font-weight: bold;
+}
+
+/* Product form container */
+.product-form-container {
+  max-width: 900px; /* Keep the form width constrained for better usability */
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Products list container */
+.products-list-container {
+  width: 100%;
+  margin-top: 10px;
+  overflow-x: auto; /* Allow horizontal scrolling on small screens */
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Animation for smooth transitions */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Form header with back button */
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #EFEDE7;
+  padding-bottom: 15px;
+}
+
+.form-header h3 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.btn-back {
+  background-color: #6A6D69;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.btn-back:hover {
+  background-color: #5a5d59;
+}
+
+.btn-back:before {
+  content: "←";
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+/* Inventory view with Add Product button */
+.inventory-view {
+  width: 100%;
+}
+
+.inventory-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.btn-add-product {
+  background-color: #F65A11;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.3px;
+}
+
+.btn-add-product:hover {
+  background-color: #e0510f;
+  box-shadow: 0 2px 5px rgba(246, 90, 17, 0.3);
+}
+
+.btn-add-product:before {
+  content: "+";
+  margin-right: 8px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Empty state and loading messages */
+.products-list-container p {
+  text-align: center;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  color: #6A6D69;
+  font-size: 16px;
+}
+
+/* Loading state */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+/* Search bar styling */
+.search-bar {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px 15px 12px 40px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: all 0.2s ease;
+  background-color: white;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #F65A11;
+  box-shadow: 0 0 0 2px rgba(246, 90, 17, 0.1);
+}
+
+.search-bar::before {
+  content: "🔍";
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6A6D69;
+  font-size: 16px;
+}
+
+/* Pagination controls styling */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  gap: 15px;
+}
+
+.btn-pagination {
+  padding: 8px 15px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  color: #22331D;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-pagination:hover:not(:disabled) {
+  background-color: #F9F8F5;
+  border-color: #F65A11;
+  color: #F65A11;
+}
+
+.btn-pagination:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-info {
+  font-size: 14px;
+  color: #6A6D69;
+  font-weight: 500;
 }

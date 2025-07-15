@@ -548,5 +548,34 @@ tbody td {
   color: #555;
 }
 
+/* Theme toggle button */
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.theme-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 
 

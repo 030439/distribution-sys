@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import './Settings.css'; // You'll need to create this CSS file
+import './Settings.css'; 
+import ToggleSwitch from '../components/ToggleSwitch';
+import { useAppContext } from '../context/AppContext';
 
 function Settings() {
   const [activeTab, setActiveTab] = useState('plan');
+  // Get darkMode state and toggleDarkMode function from context
+  const { darkMode, toggleDarkMode } = useAppContext();
   
   return (
     <div className="settings-container">
@@ -135,7 +139,41 @@ function Settings() {
       {activeTab === 'general' && (
         <div className="general-settings">
           <h2 className="section-title">General Settings</h2>
-          <p>these are general settings </p>
+          
+          <div className="settings-section">
+            <h3 className="subsection-title">Appearance</h3>
+            
+            <ToggleSwitch 
+              isOn={darkMode}
+              onToggle={toggleDarkMode}
+              label="Dark Mode"
+              description="Toggle between light and dark theme"
+            />
+          </div>
+          
+          <div className="settings-section">
+            <h3 className="subsection-title">Language and Regional</h3>
+            
+            <div className="settings-option">
+              <div className="option-label">Language</div>
+              <select className="settings-select" defaultValue="en">
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+              </select>
+            </div>
+            
+            <div className="settings-option">
+              <div className="option-label">Time Zone</div>
+              <select className="settings-select" defaultValue="utc">
+                <option value="utc">UTC (Coordinated Universal Time)</option>
+                <option value="est">EST (Eastern Standard Time)</option>
+                <option value="pst">PST (Pacific Standard Time)</option>
+                <option value="cet">CET (Central European Time)</option>
+              </select>
+            </div>
+          </div>
         </div>
       )}
       

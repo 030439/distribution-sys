@@ -11,6 +11,23 @@ class UserRoleDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call([]);
+         $data = [
+            [
+                'user_id' => 1,
+                'role_id' => 1,
+                'app_id' => 1,
+            ],
+            [
+                'user_id' => 1,
+                'role_id' => 2,
+                'app_id' => 1,
+            ],
+            [
+                'user_id' => 1,
+                'role_id' => 3,
+                'app_id' => 1,
+            ],
+        ];
+        DB::table('userroles')->insert($data);
     }
 }

@@ -11,7 +11,7 @@ return new class extends Migration
      */
      public function up(): void
     {
-        Schema::create('permission', function (Blueprint $table) {
+        Schema::create('permissions', function (Blueprint $table) {
             $table->id(); // id INT(11) unsigned AUTO_INCREMENT
 
             $table->unsignedInteger('role_id');
@@ -24,8 +24,8 @@ return new class extends Migration
             $table->boolean('allow_delete')->default(false);
 
             // Foreign keys
-            $table->foreign('role_id')->references('id')->on('t17role')->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign('menu_id')->references('id')->on('t00menu')->onUpdate('restrict')->onDelete('restrict');
+            $table->foreign('role_id')->references('id')->on('roles')->onUpdate('restrict')->onDelete('restrict');
+            $table->foreign('menu_id')->references('id')->on('menus')->onUpdate('restrict')->onDelete('restrict');
         });
     }
 
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('permission');
+        Schema::dropIfExists('permissions');
     }
 };

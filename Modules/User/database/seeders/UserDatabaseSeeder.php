@@ -11,6 +11,16 @@ class UserDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call([]);
+         $data = [
+            [
+                'user_name' => 'masteradmin@mytutorpod.com',
+                'password' => sha1(md5('Mtp@1234')),
+                'user_type' => 'company',
+                'status' => 'Active',
+                'app_detail_id' => 1,
+                'verified' => 1,
+            ]
+        ];
+        DB::table('users')->insert($data);
     }
 }

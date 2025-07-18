@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id(); // Auto-increment primary key (INT, unsigned)
             $table->string('user_name', 255);
             $table->string('password', 255);
-            $table->enum('user_type', ['admin', 'user', 'company', 'student', 'family', 'staff', 'tutor'])->default('user');
+            $table->enum('user_type', ['admin', 'user', 'company','staff'])->default('user');
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->unsignedInteger('uonline')->nullable();
             $table->dateTime('last_active_timestamp')->nullable();

@@ -11,6 +11,32 @@ class DesignationDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call([]);
+        $data = [
+            [
+                'department_id' => 1,
+                'designation' => 'SuperAdmin',
+                'status' => 'active',
+                'created_by' => 1,
+                'updated_by' => 1,
+                'deleted_by' => null,
+            ],
+            [
+                'department_id' => 2,
+                'designation' => 'Admin',
+                'status' => 'active',
+                'created_by' => 1,
+                'updated_by' => 1,
+                'deleted_by' => null,
+            ],
+            [
+                'department_id' => 2,
+                'designation' => 'Tutor',
+                'status' => 'active',
+                'created_by' => 1,
+                'updated_by' => 1,
+                'deleted_by' => null,
+            ],
+        ];
+        DB::table('designations')->insert($data);
     }
 }

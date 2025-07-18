@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('role_id');
-            $table->unsignedBigInteger('app_detail_id');
+            $table->unsignedBigInteger('app_id');
             $table->timestamp('created_at')->useCurrent();
 
             // Foreign keys
@@ -25,12 +25,12 @@ return new class extends Migration
                 ->onUpdate('restrict');
 
             $table->foreign('role_id')
-                ->references('id')->on('t17role')
+                ->references('id')->on('roles')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
 
-            $table->foreign('app_detail_id')
-                ->references('id')->on('t01appdetail')
+            $table->foreign('app_id')
+                ->references('id')->on('busineses')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
         });

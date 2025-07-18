@@ -32,7 +32,7 @@ return new class extends Migration
             $table->softDeletes();
 
             // Foreign keys
-            $table->foreign('currency_id')->references('id')->on('t00currencies')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('currency_id')->references('id')->on('tcurrencies')->onDelete('restrict')->onUpdate('restrict');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('restrict')->onUpdate('restrict');
             $table->foreign('updated_by')->references('id')->on('users')->onDelete('restrict')->onUpdate('restrict');
             $table->foreign('deleted_by')->references('id')->on('users')->onDelete('restrict')->onUpdate('restrict');

@@ -11,6 +11,22 @@ class DepartmentDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call([]);
+        $data = [
+            [
+                'department' => 'Management',
+                'status' => 'active',
+                'created_by' => 1,
+                'updated_by' => 1,
+                'deleted_by' => null,
+            ],
+            [
+                'department' => 'Teaching',
+                'status' => 'active',
+                'created_by' => 1,
+                'updated_by' => 1,
+                'deleted_by' => null,
+            ],
+        ];
+         DB::table('departments')->insert($data);
     }
 }

@@ -9,12 +9,23 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+     public function up(): void
     {
         Schema::create('permission', function (Blueprint $table) {
-            $table->id();
-            
-            $table->timestamps();
+            $table->id(); // id INT(11) unsigned AUTO_INCREMENT
+
+            $table->unsignedInteger('role_id');
+            $table->unsignedInteger('menu_id');
+
+            // Bit-like permissions (use BOOLEAN or TINYINT(1) in Laravel)
+            $table->boolean('allow_create')->default(false);
+            $table->boolean('allow_read')->default(false);
+            $table->boolean('allow_update')->default(false);
+            $table->boolean('allow_delete')->default(false);
+
+            // Foreign keys
+            $table->foreign('role_id')->references('id')->on('t17role')->onUpdate('restrict')->onDelete('restrict');
+            $table->foreign('menu_id')->references('id')->on('t00menu')->onUpdate('restrict')->onDelete('restrict');
         });
     }
 

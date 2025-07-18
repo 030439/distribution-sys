@@ -11,10 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            
-            $table->timestamps();
+         Schema::create('users', function (Blueprint $table) {
+            $table->id(); // Auto-increment primary key (INT, unsigned)
+            $table->string('user_name', 255);
+            $table->string('password', 255);
+            $table->enum('user_type', ['admin', 'user', 'company', 'student', 'family', 'staff', 'tutor'])->default('user');
+            $table->enum('status', ['Active', 'Inactive'])->default('Active');
+            $table->unsignedInteger('uonline')->nullable();
+            $table->dateTime('last_active_timestamp')->nullable();
+            $table->unsignedInteger('app_id')->nullable();
+            $table->string('reset_link', 50)->nullable();
+            $table->boolean('force_password_reset')->default(false)->nullable();
+            $table->string('activate_hash', 50)->nullable();
+            $table->dateTime('reset_expires')->nullable();
+            $table->dateTime('reset_at')->nullable();
+            $table->string('reset_hash', 50)->nullable();
+            $table->boolean('verified')->default(false);
+            $table->text('google_id')->nullable();
+            $table->timestamps(); // creates 'created_at' and 'updated_at'
+            $table->softDeletes(); // creates 'deleted_at'
         });
     }
 

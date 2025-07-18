@@ -12,9 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('departments', function (Blueprint $table) {
-            $table->id();
-            
-            $table->timestamps();
+            $table->id(); // INT(11) unsigned AUTO_INCREMENT
+
+            $table->string('department', 50)->nullable();
+
+            $table->enum('status', ['Active', 'Inactive', 'Pending'])->default('Active');
+
+            $table->unsignedTinyInteger('created_by');
+            $table->unsignedTinyInteger('updated_by')->nullable();
+            $table->unsignedTinyInteger('deleted_by')->nullable();
+
+            // created_at with default CURRENT_TIMESTAMP and updated_at with ON UPDATE
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
+            $table->timestamp('deleted_at')->nullable(); // Soft delete compatible
         });
     }
 

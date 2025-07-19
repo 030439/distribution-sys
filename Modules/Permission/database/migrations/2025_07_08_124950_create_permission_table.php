@@ -24,8 +24,8 @@ return new class extends Migration
             $table->boolean('allow_delete')->default(false);
 
             // Foreign keys
-            $table->foreign('role_id')->references('id')->on('roles')->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign('menu_id')->references('id')->on('menus')->onUpdate('restrict')->onDelete('restrict');
+            // $table->foreign('role_id')->references('id')->on('roles')->onUpdate('restrict')->onDelete('restrict');
+            // $table->foreign('menu_id')->references('id')->on('menus')->onUpdate('restrict')->onDelete('restrict');
         });
     }
 

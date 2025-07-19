@@ -29,9 +29,9 @@ return new class extends Migration
             $table->softDeletes();     // deleted_at
 
             // Foreign key constraints
-            $table->foreign('created_by')->references('id')->on('users')->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign('updated_by')->references('id')->on('users')->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign('deleted_by')->references('id')->on('users')->onUpdate('restrict')->onDelete('restrict');
+            // $table->foreign('created_by')->references('id')->on('t17users')->onUpdate('restrict')->onDelete('restrict');
+            // $table->foreign('updated_by')->references('id')->on('t17users')->onUpdate('restrict')->onDelete('restrict');
+            // $table->foreign('deleted_by')->references('id')->on('t17users')->onUpdate('restrict')->onDelete('restrict');
         });
     }
 

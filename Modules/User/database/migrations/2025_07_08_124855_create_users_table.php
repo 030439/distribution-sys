@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-         Schema::create('users', function (Blueprint $table) {
+         Schema::create('t17users', function (Blueprint $table) {
             $table->id(); // Auto-increment primary key (INT, unsigned)
             $table->string('user_name', 255);
             $table->string('password', 255);
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('t17users');
     }
 };

@@ -28,10 +28,10 @@ return new class extends Migration
             $table->timestamp('deleted_at')->nullable();
 
             // Foreign key constraints
-            $table->foreign('department_id')->references('id')->on('departments')->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign('created_by')->references('id')->on('users')->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign('updated_by')->references('id')->on('users')->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign('deleted_by')->references('id')->on('users')->onUpdate('restrict')->onDelete('restrict');
+            // $table->foreign('department_id')->references('id')->on('departments')->onUpdate('restrict')->onDelete('restrict');
+            // $table->foreign('created_by')->references('id')->on('t17users')->onUpdate('restrict')->onDelete('restrict');
+            // $table->foreign('updated_by')->references('id')->on('t17users')->onUpdate('restrict')->onDelete('restrict');
+            // $table->foreign('deleted_by')->references('id')->on('t17users')->onUpdate('restrict')->onDelete('restrict');
         });
     }
 

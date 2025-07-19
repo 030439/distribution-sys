@@ -1,28 +1,37 @@
 <?php
-
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'user_name' => [
+                'required', 'min:3',
+                'exists:users,user_name',
+                new \App\Rules\IsVerified,
+                new \App\Rules\IsUserActive,
+                new \App\Rules\IsAppActive,
+            ],
+            'password' => [
+                'required', 'min:8',
+                new \App\Rules\AuthenticateUser($this->input('user_name')),
+                new \App\Rules\StrongPassword,
+            ],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'user_name.exists' => 'Please check the User Name. It does not exist in our system.',
         ];
     }
 }

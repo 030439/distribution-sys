@@ -1,0 +1,13 @@
+{
+    "User": true,
+    "Role": true,
+    "Menu": true,
+    "Permission": true,
+    "Department": true,
+    "Designation": true,
+    "Currency": true,
+    "TimeZone": true,
+    "Business": true,
+    "UserRole": true,
+    "Plan": true
+}

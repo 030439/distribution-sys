@@ -1,8 +1,8 @@
 <?php
-namespace Modules\Role\Database\Seeders;
+namespace Modules\Business\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 
 class BusinessDatabaseSeeder extends Seeder
 {
@@ -11,7 +11,7 @@ class BusinessDatabaseSeeder extends Seeder
      */
      public function run()
     {
-        DB::table('t01appdetail')->insert([
+        $data=[
             [
                 'logo' => 'companyLogo.png',
                 'first_name' => 'Kp',
@@ -25,12 +25,12 @@ class BusinessDatabaseSeeder extends Seeder
                 'time_zone_id' => 1,
                 'status' => 'Active',
                 'currency_id' => 1,
-                'app_id' => 1,
+                // 'application_id' => 1,
                 'instagram' => 'www.instagram.com',
                 'twitter' => 'www.twitter.com',
                 'facebook' => 'www.facebook.com',
             ],
-            // ...additional rows if needed
-        ]);
+        ];
+        DB::table('busineses')->insert($data);
     }
 }

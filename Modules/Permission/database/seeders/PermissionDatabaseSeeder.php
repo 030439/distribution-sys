@@ -3,7 +3,7 @@
 namespace Modules\Permission\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 class PermissionDatabaseSeeder extends Seeder
 {
     /**

@@ -20,7 +20,7 @@ return new class extends Migration
 
             // Foreign keys
             $table->foreign('user_id')
-                ->references('id')->on('users')
+                ->references('id')->on('t17users')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
 

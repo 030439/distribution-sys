@@ -3,7 +3,7 @@
 namespace Modules\User\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 class UserDatabaseSeeder extends Seeder
 {
     /**
@@ -13,14 +13,14 @@ class UserDatabaseSeeder extends Seeder
     {
          $data = [
             [
-                'user_name' => 'masteradmin@mytutorpod.com',
-                'password' => sha1(md5('Mtp@1234')),
+                'user_name' => 'admin@saas.com',
+                'password' => sha1(md5('info@1234')),
                 'user_type' => 'company',
                 'status' => 'Active',
-                'app_detail_id' => 1,
+                'app_id' => 1,
                 'verified' => 1,
             ]
         ];
-        DB::table('users')->insert($data);
+        DB::table('t17users')->insert($data);
     }
 }

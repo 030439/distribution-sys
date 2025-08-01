@@ -6,3 +6,8 @@ use Modules\User\Http\Controllers\UserController;
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('users', UserController::class)->names('user');
 });
+
+Route::get('/test-route', function () {
+    return 'User module route loaded';
+});
+

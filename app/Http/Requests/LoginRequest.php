@@ -1,37 +1,46 @@
 <?php
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UserNameExists;
+use App\Rules\IsVerified;
+use App\Rules\IsAppActive;
+use App\Rules\IsUserActive;
+use App\Rules\AuthenticateUser;
+use App\Rules\IsStrongPassword;
 
 class LoginRequest extends FormRequest
 {
-    public function authorize(): bool
+    public function authorize()
     {
-        return true;
+        return true; // Allow anyone to make login request
     }
 
-    public function rules(): array
+    public function rules()
     {
-        return [
-            'user_name' => [
-                'required', 'min:3',
-                'exists:users,user_name',
-                new \App\Rules\IsVerified,
-                new \App\Rules\IsUserActive,
-                new \App\Rules\IsAppActive,
-            ],
-            'password' => [
-                'required', 'min:8',
-                new \App\Rules\AuthenticateUser($this->input('user_name')),
-                new \App\Rules\StrongPassword,
-            ],
-        ];
+        // return [
+        //     'user_name' => [
+        //         'required',
+        //         new UserNameExists,
+        //         new IsVerified,
+        //         new IsAppActive,
+        //         new IsUserActive,
+        //     ],
+        //     'password' => [
+        //         'required',
+        //         new AuthenticateUser($this->input('user_name')),
+        //         new IsStrongPassword,
+        //     ]
+        // ];
     }
 
-    public function messages(): array
+    public function messages()
     {
-        return [
-            'user_name.exists' => 'Please check the User Name. It does not exist in our system.',
-        ];
+        // return [
+        //     'user_name.required' => 'User Name is required.',
+        //     'password.required' => 'Password is required.',
+        //     'password.authenticate_user' => 'Invalid login credentials.',
+        // ];
     }
 }

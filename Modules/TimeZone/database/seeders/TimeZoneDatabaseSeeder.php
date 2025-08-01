@@ -3,7 +3,7 @@
 namespace Modules\TimeZone\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 class TimeZoneDatabaseSeeder extends Seeder
 {
     /**

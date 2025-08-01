@@ -3,7 +3,7 @@
 namespace Modules\Currency\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 class CurrencyDatabaseSeeder extends Seeder
 {
     /**

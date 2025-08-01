@@ -3,7 +3,7 @@
 namespace Modules\Department\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 class DepartmentDatabaseSeeder extends Seeder
 {
     /**

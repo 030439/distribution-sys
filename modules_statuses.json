@@ -9,5 +9,6 @@
     "TimeZone": true,
     "Business": true,
     "UserRole": true,
-    "Plan": true
+    "Plan": true,
+    "Auth": true
 }

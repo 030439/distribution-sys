@@ -22,7 +22,7 @@ function Products() {
   // Search and pagination state
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
   
   // Filter state
   const [showFilters, setShowFilters] = useState(false);
@@ -252,31 +252,35 @@ function Products() {
             </button>
           </div>
           <form onSubmit={handleSubmit} className="product-form">
-            <div className="form-group required">
-              <label htmlFor="name">Product Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                placeholder="Enter product name"
-                required
-              />
-            </div>
-            
-            <div className="form-group">
-              <label htmlFor="description">Description</label>
-              <textarea
-                id="description"
-                name="description"
-                value={formData.description}
-                onChange={handleInputChange}
-                placeholder="Enter product description (optional)"
-              />
-            </div>
-            
             <div className="form-row">
+              <div className="form-group required">
+                <label htmlFor="name">Product Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  placeholder="Enter product name"
+                  required
+                />
+              </div>
+              
+              <div className="form-group required">
+                <label htmlFor="sku">SKU</label>
+                <input
+                  type="text"
+                  id="sku"
+                  name="sku"
+                  value={formData.sku}
+                  onChange={handleInputChange}
+                  placeholder="Enter unique product identifier"
+                  required
+                />
+              </div>
+            </div>
+            
+            <div className="form-row-triple">
               <div className="form-group required">
                 <label htmlFor="price">Price</label>
                 <input
@@ -305,30 +309,28 @@ function Products() {
                   required
                 />
               </div>
-            </div>
-            
-            <div className="form-group required">
-              <label htmlFor="sku">SKU</label>
-              <input
-                type="text"
-                id="sku"
-                name="sku"
-                value={formData.sku}
-                onChange={handleInputChange}
-                placeholder="Enter unique product identifier"
-                required
-              />
+              
+              <div className="form-group">
+                <label htmlFor="image_url">Image URL</label>
+                <input
+                  type="text"
+                  id="image_url"
+                  name="image_url"
+                  value={formData.image_url}
+                  onChange={handleInputChange}
+                  placeholder="https://example.com/image.jpg (optional)"
+                />
+              </div>
             </div>
             
             <div className="form-group">
-              <label htmlFor="image_url">Image URL</label>
-              <input
-                type="text"
-                id="image_url"
-                name="image_url"
-                value={formData.image_url}
+              <label htmlFor="description">Description</label>
+              <textarea
+                id="description"
+                name="description"
+                value={formData.description}
                 onChange={handleInputChange}
-                placeholder="https://example.com/image.jpg (optional)"
+                placeholder="Enter product description (optional)"
               />
             </div>
             
@@ -506,29 +508,71 @@ function Products() {
                   </tbody>
                 </table>
                 
-                {totalPages > 1 && (
-                  <div className="pagination-controls">
+                {/* Pagination - styled like Orders page */}
+                <div className="pagination-controls">
+                  <div className="items-per-page">
+                    Items per page: 
+                    <select 
+                      value={itemsPerPage} 
+                      onChange={(e) => {
+                        setCurrentPage(1);
+                        setItemsPerPage(Number(e.target.value));
+                      }}
+                    >
+                      <option value={5}>5</option>
+                      <option value={10}>10</option>
+                      <option value={20}>20</option>
+                    </select>
+                  </div>
+
+                  <div className="page-controls">
                     <button 
-                      className="btn-pagination"
+                      className="previous-btn"
                       onClick={() => paginate(currentPage - 1)}
                       disabled={currentPage === 1}
                     >
-                      Previous
+                      ← Previous
                     </button>
                     
-                    <span className="pagination-info">
-                      Page {currentPage} of {totalPages} ({filteredProducts.length} products)
-                    </span>
+                    {/* Generate page number buttons */}
+                    {Array.from({ length: totalPages }, (_, i) => {
+                      // Show first page, current page, and last page
+                      // Also show one page before and after current page
+                      const pageNum = i + 1;
+                      
+                      if (
+                        pageNum === 1 || 
+                        pageNum === totalPages || 
+                        (pageNum >= currentPage - 1 && pageNum <= currentPage + 1)
+                      ) {
+                        return (
+                          <button 
+                            key={pageNum}
+                            className={`page-number ${currentPage === pageNum ? 'active' : ''}`}
+                            onClick={() => paginate(pageNum)}
+                          >
+                            {pageNum}
+                          </button>
+                        );
+                      }
+                      
+                      // Show ellipsis for breaks in sequence
+                      if (pageNum === 2 || pageNum === totalPages - 1) {
+                        return <span key={`ellipsis-${pageNum}`}>...</span>;
+                      }
+                      
+                      return null;
+                    })}
                     
                     <button 
-                      className="btn-pagination"
+                      className="next-btn"
                       onClick={() => paginate(currentPage + 1)}
                       disabled={currentPage === totalPages}
                     >
-                      Next
+                      Next →
                     </button>
                   </div>
-                )}
+                </div>
               </>
             )}
           </div>

@@ -7,6 +7,10 @@ function Orders() {
   const [orders, setOrders] = useState([]);
   const [slideDirection, setSlideDirection] = useState('right');
   
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  
   // tab change handler with slide direction
   const handleTabChange = (tabName) => {
     if (activeTab === tabName) return;
@@ -44,6 +48,17 @@ function Orders() {
       setOrders(ordersData[activeTab] || []);
     }
   }, [activeTab]);
+
+  // Pagination functionality
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  
+  // Get current orders for pagination
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentOrders = orders.slice(indexOfFirstItem, indexOfLastItem);
+  
+  // Calculate total pages
+  const totalPages = Math.ceil(orders.length / itemsPerPage);
 
   return (
     <>
@@ -150,7 +165,7 @@ function Orders() {
               </thead>
               <tbody>
                 {orders.length > 0 ? (
-                  orders.map(order => (
+                  currentOrders.map(order => (
                     <tr key={order.id}>
                       <td><input type="checkbox" /></td>
                       <td>
@@ -198,12 +213,15 @@ function Orders() {
           </div>
           <div className="page-controls">
             <button className="previous-btn">← Previous</button>
-            <button className="page-number active">1</button>
-            <button className="page-number">2</button>
-            <button className="page-number">3</button>
-            <button className="page-number">4</button>
+            {[...Array(totalPages)].map((_, index) => (
+              <button 
+                key={index} 
+                className={`page-number ${currentPage === index + 1 ? 'active' : ''}`}
+                onClick={() => paginate(index + 1)}>
+                {index + 1}
+              </button>
+            ))}
             <span>...</span>
-            <button className="page-number">30</button>
             <button className="next-btn">Next →</button>
           </div>
         </div>
